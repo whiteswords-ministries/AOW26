@@ -240,10 +240,11 @@ const audio = new Audio(); audio.preload = "auto"; audio.src = SONG_FILE;
 let songOk = true;
 audio.addEventListener("error", () => { songOk = false; mini.remove(); });
 audio.addEventListener("loadedmetadata", () => { if (CLIP_START) audio.currentTime = CLIP_START; });
-audio.addEventListener("timeupdate", () => { if (CLIP_END && audio.currentTime >= CLIP_END) { audio.pause(); audio.currentTime = CLIP_START; } });
+// Loop: when the clip reaches CLIP_END, jump back to CLIP_START and keep playing
+setInterval(() => { if (!audio.paused && CLIP_END && audio.currentTime >= CLIP_END - 0.15) audio.currentTime = CLIP_START; }, 100);
 audio.addEventListener("play", () => { mbtn.textContent = "Pause song"; mini.classList.add("on"); });
 audio.addEventListener("pause", () => { mbtn.textContent = "Play song"; mini.classList.remove("on"); });
-audio.addEventListener("ended", () => { audio.currentTime = CLIP_START; mbtn.textContent = "Play again"; mini.classList.remove("on"); });
+audio.addEventListener("ended", () => { audio.currentTime = CLIP_START; audio.play().catch(() => {}); });
 function playSong() { if (!songOk) return; if (audio.currentTime < CLIP_START) audio.currentTime = CLIP_START; audio.play().catch(() => { mbtn.textContent = "Play song"; }); }
 mbtn.addEventListener("click", () => { audio.paused ? playSong() : audio.pause(); });
 // Title: split words into letters, then tilt with the pointer
