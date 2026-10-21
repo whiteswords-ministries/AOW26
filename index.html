@@ -231,7 +231,7 @@ body:not(.entered) .hero .rise,body:not(.entered) .hero .of,body:not(.entered) .
 <script>
 document.documentElement.classList.add("js");
 if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});document.querySelectorAll(".rv").forEach(el=>io.observe(el))}else{document.querySelectorAll(".rv").forEach(el=>el.classList.add("in"))}
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQ53OXNXHBshnTqsDdKQx9UCwnGWqI18XN8dgvwFeYNLucEp26RDB9no137fv5a_NC/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyh-2iVb0QtywBdWWQ3JBPsQFoNuUtu-yqzbSYWKmd_2UIQM5krIy33tWkgwuCLTJ65/exec";
 
 // === YOUR SONG: put your audio file in an "audio" folder next to index.html and set its name here ===
 const SONG_FILE = "audio/song.mp3";
